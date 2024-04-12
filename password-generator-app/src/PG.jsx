@@ -10,7 +10,11 @@ const PG = () => {
     const [includeSpecialChars, setIncludeSpecialChars] = useState(true)
 
     const generatePassword = () => {
-        // console.log(passwordLength);
+        if (passwordLength > 30 || passwordLength < 5) {
+            alert(`Invalid Password Length!!
+length can be between 5 to 30.`)
+            return
+        }
         const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
         const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const numbers = '1234567890';
