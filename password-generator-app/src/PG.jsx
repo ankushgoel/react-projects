@@ -3,32 +3,73 @@ import Switch from "react-switch";
 
 const PG = () => {
 
-    const [checked, setChecked] = useState(false);
+    const [password, setPassword] = useState("");
+    const [passwordLength, setPasswordLength] = useState(8);
+    const [includeUpperCase, setIncludeUpperCase] = useState(true)
+    const [includeNumbers, setIncludeNumbers] = useState(true)
+    const [includeSpecialChars, setIncludeSpecialChars] = useState(true)
 
-    function handleChange() {
-        setChecked(!checked);
+    const generatePassword = () => {
+        // console.log(passwordLength);
+        const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
+        const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const numbers = '1234567890';
+        const specialChars = '!@#$%^&*()-_+=';
+
+        let validChars = lowerCaseChars;
+
+        if (includeUpperCase) {
+            validChars += upperCaseChars;
+        }
+        if (includeNumbers) {
+            validChars += numbers
+        }
+        if (includeSpecialChars) {
+            validChars += specialChars
+        }
+        let newPassword = "";
+        for (let i = 0; i < passwordLength; i++) {
+            const randomIndex = Math.floor(Math.random() * validChars.length)
+            newPassword += validChars.charAt(randomIndex);
+            // console.log(validChars[randomIndex]);
+        }
+        // console.log(newPassword);
+        setPassword(newPassword);
     }
 
     return (
         <div className='pt-8 text-white font-bold flex flex-col 
         bg-purple-800 w-[350px] shadow-2xl mx-auto mb-52 p-4 hover:shadow-blue-900 rounded-md'>
-            <div className='mb-4 flex justify-between'>
-                <label htmlFor="">Password Length:</label>
-                <input className='w-12 bg-purple-700 pl-2' type="number" />
+            <div className='form'>
+                <div className='mb-4 flex justify-between'>
+                    <label htmlFor='length'>Password Length:</label>
+                    <input name='length' type="number"
+                        min={5} max={30}
+                        className='w-12 bg-purple-700 pl-2'
+                        value={passwordLength}
+                        onChange={(e) => setPasswordLength(e.target.value)} />
+                </div>
+                <div className='mb-4 flex justify-between'>
+                    <label htmlFor='uppercase'>Include Uppercase:</label>
+                    <Switch name='uppercase' height={20} width={40}
+                        handleDiameter={18} onChange={() => setIncludeUpperCase(!includeUpperCase)}
+                        checked={includeUpperCase} />
+                </div>
+                <div className='mb-4 flex justify-between'>
+                    <label htmlFor='numbers'>Include Numbers:</label>
+                    <Switch name='numbers' height={20} width={40}
+                        handleDiameter={18} onChange={() => setIncludeNumbers(!includeNumbers)}
+                        checked={includeNumbers} />
+                </div>
+                <div className='mb-4 flex justify-between'>
+                    <label htmlFor='specialChars'>Include Special Characters:</label>
+                    <Switch name='specialChars' height={20} width={40}
+                        handleDiameter={18} onChange={() => setIncludeSpecialChars(!includeSpecialChars)}
+                        checked={includeSpecialChars} />
+                </div>
+                <button className='' onClick={generatePassword}>Generate Password</button>
             </div>
-            <div className='mb-4 flex justify-between'>
-                <label htmlFor="">Include Uppercase:</label>
-                <Switch height={20} width={40} handleDiameter={18} onChange={handleChange} checked={checked} />
-            </div>
-            <div className='mb-4 flex justify-between'>
-                <label htmlFor="">Include Numbers:</label>
-                <Switch height={20} width={40} handleDiameter={18} />
-            </div>
-            <div className='mb-4 flex justify-between'>
-                <label htmlFor="">Include Special:</label>
-                <Switch height={20} width={40} handleDiameter={18} />
-            </div>
-            <button className=''>Generate Password</button>
+            <h2>{password}</h2>
         </div>
     )
 }
