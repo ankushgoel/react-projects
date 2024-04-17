@@ -40,7 +40,7 @@ const ToDoMenu = () => {
                 <input type="text" value={task} onChange={(e) => setTask(e.target.value)}
                     placeholder='Enter your task'
                     className='w-[350px] border-2 border-blue-900 rounded
-                bg-gradient-to-r from-sky-900 via-sky-500 to-indigo-200
+                bg-gradient-to-r from-blue-900 via-sky-600 to-indigo-300
                 font-bold px-3 py-2 mr-3 text-white' />
                 <button type='submit' className='bg-blue-500 hover:bg-blue-600 font-bold p-3 rounded'
                     onClick={addTask}>
@@ -50,9 +50,11 @@ const ToDoMenu = () => {
             <div className='flex flex-col items-center'>
                 {list.length ?
                     list.map((task) =>
-                        <div key={task.id} className='flex items-center w-[350px] text-emerald-400 
-                        font-bold space-x-2 bg-gray-200 p-2 mb-2'>
-                            <h4 className={`text-black flex-grow ${task.toggle ? 'line-through' : ''}`}>{task.title}</h4>
+                        <div key={task.id} className={`flex items-center w-[350px] 
+                        font-bold space-x-2 bg-gray-200 p-2 mb-2
+                        ${task.toggle ? 'bg-green-800 text-cyan-50' : 'bg-violet-500'}
+                        `}>
+                            <h4 className={`flex-grow ${task.toggle ? 'line-through' : ''}`}>{task.title}</h4>
                             <Switch name='uppercase' height={20} width={40} handleDiameter={18}
                                 checked={task.toggle} onChange={() => toggleTask(task.id)} />
                             <button className='text-red-600 font-bold text-xl p-1'
