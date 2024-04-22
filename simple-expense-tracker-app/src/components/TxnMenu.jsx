@@ -68,14 +68,23 @@ const TxnMenu = ({ onIncome, onExpense }) => {
                             <option value="income">Income</option>
                             <option value="expense">Expense</option>
                         </select>
-                        <button className="bg-black mt-4 p-2 rounded-lg hover:bg-gray-700"
+                        <button className="bg-black my-4 p-2 rounded-lg hover:bg-gray-700"
                             type="submit" onClick={handleSubmit}>
                             Add
                         </button>
                     </div>
                 </form>
             }
-
+            {/* ToDo - Add scroll to txns, Option to Edit and remove txns */}
+            {data.length &&
+                data.map((txn) => (
+                    <div className={`rounded-md mb-2 ${txn.txnType == "income" ? "bg-green-600" : "bg-red-500"}`} key={txn.id}>
+                        <div className="flex w-[200px] justify-between font-bold gap-4 p-2">
+                            <p>{txn.title}</p>
+                            <p>{txn.amount}</p>
+                        </div>
+                    </div>
+                ))}
         </div>
     )
 }
