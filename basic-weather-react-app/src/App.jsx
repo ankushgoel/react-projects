@@ -1,20 +1,15 @@
-import { useState } from 'react'
 import './App.css'
+import WeatherCard from './components/WeatherCard'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-      </div>
-      <h1>Weather App</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+
+    <div>
+      <h1 className='text-3xl'>Weather App</h1>
+      <WeatherCard />
+    </div>
+
   )
 }
 
