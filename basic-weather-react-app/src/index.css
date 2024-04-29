@@ -33,6 +33,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  background-attachment: fixed;
+  background-image: url(/clouds-bg.png);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
